@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksTable extends Migration
+class CreateDriversTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,20 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('offer_id')->unsigned();
-            $table->string('nama_waris');
-            $table->string('tel_waris');
-            $table->string('email_waris');
-            $table->integer('kekerapan_notifikasi');
-            $table->string('status_book')->default('Processing');
-            $table->string('status_sah')->default('Pending');
-
+            $table->string('noLesen')->nullable();
+            $table->string('lesen_luput')->nullable();
+            $table->string('gambar_lesen')->nullable();
+            $table->string('gambar_ic')->nullable();
+            $table->string('no_plat')->nullable();
+            $table->string('jenis_kereta')->nullable();
+            $table->string('roadtax_luput')->nullable();
             $table->timestamps();
 
             //foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade');
-
         });
     }
 
@@ -40,6 +37,6 @@ class CreateBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('drivers');
     }
 }

@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-            <form class="form-horizontal" action="{{ action('BooksController@store') }}" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{ action('BooksController@store', $book->id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
           <div class="col-sm-6 col-md-4">
             <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
@@ -28,6 +28,7 @@
               <h3>{{$book->pickup_loc}}-> {{ $book->destination}}</h3>
               <h4><i class="glyphicon glyphicon-calendar"></i> {{ $book->date}}</h4>
               <h4><i class="glyphicon glyphicon-time"></i> {{ $book->time}}</h4>
+              <h4><i class="glyphicon glyphicon-list-alt"></i> {{ $book->info}}</h4>
           </div>
           </div>
           <div class="col-sm-6 col-md-8">
@@ -49,10 +50,58 @@
                   </div>
               </div>
 
+              <div class="form-group{{ $errors->has('tel_waris') ? ' has-error' : '' }}">
+                  <label for="tel_waris" class="col-md-4 control-label">Heir Tel No</label>
+
+                  <div class="col-md-6">
+                      <input id="tel_waris" type="text" class="form-control" name="tel_waris" value="{{ old('tel_waris') }}" required autofocus>
+
+                      @if ($errors->has('tel_waris'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('tel_waris') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
+              <div class="form-group{{ $errors->has('email_waris') ? ' has-error' : '' }}">
+                  <label for="email_waris" class="col-md-4 control-label">Heir Email</label>
+
+                  <div class="col-md-6">
+                      <input id="email_waris" type="email" class="form-control" name="email_waris" value="{{ old('email_waris') }}" required autofocus>
+
+                      @if ($errors->has('email_waris'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('email_waris') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
+              <div class="form-group{{ $errors->has('kekerapan_notifikasi') ? ' has-error' : '' }}">
+                  <label for="kekerapan_notifikasi" class="col-md-4 control-label">Notification Frequency</label>
+
+                  <div class="col-md-6">
+                      <select id="kekerapan_notifikasi" type="text" class="form-control" name="kekerapan_notifikasi" required autofocus>
+                        <option value="0" disabled selected>Please Select</option>
+                        <option value="15">For every 15 minutes</option>
+                        <option value="30">For every 30 minutes</option>
+                        <option value="45">For every 45 minutes</option>
+                        <option value="60">For every 60 minutes</option>
+                      </select>
+
+                      @if ($errors->has('kekerapan_notifikasi'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('kekerapan_notifikasi') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
+
           </div>
             <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
-                  <a href="{{ action('OfferController@index') }}" class="btn btn-default">Edit</a>
                   <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>

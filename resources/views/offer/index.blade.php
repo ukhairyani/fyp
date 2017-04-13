@@ -4,10 +4,18 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2>Offer Ride<a href="{{ url('/offer/create') }}" class="btn btn-info pull-right" role="button">Offer New Ride</a></h2>
+        <h2>Offer Ride<a href="{{ url('/profile') }}" class="btn btn-info pull-right" role="button">Offer New Ride</a></h2>
     </div>
 
     <div class="panel-body">
+        <div class="col-md-12">
+            <form class="form-inline text-center" method="get" action="{{ url('offer') }}">
+                <input class="form-control" type="text" placeholder="Search your destination" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">

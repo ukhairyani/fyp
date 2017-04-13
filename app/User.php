@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Driver;
 use App\Offer;
+use App\Book;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -19,10 +21,21 @@ class User extends Authenticatable
         'matricNo', 'name', 'noIc', 'noTel', 'email', 'password', 'gender', 'address', 'faculty'
     ];
 
+    public function driver()
+    {
+        return $this->hasOne(Driver::class, 'user_id');
+    }
+
     public function offer()
     {
         return $this->hasMany(Offer::class);
     }
+
+    public function book()
+    {
+        return $this->hasMany(Book::class);
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

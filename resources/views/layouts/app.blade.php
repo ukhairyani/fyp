@@ -53,9 +53,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{ url('/home') }}">Home</a></li>
-                        <li><a href="{{ url('/offer') }}">Offer Ride</a></li>
+                        <li><a href="{{ url('/home') }}" class="glyphicon glyphicon-home">Home</a></li>
+                        <li><a href="{{ url('/offer') }}" class="glyphicon glyphicon-map-marker">Offer Ride</a></li>
                         <li><a href="{{ url('/catalog') }}">Catalog</a></li>
+                        <li><a href="{{ url('/notification') }}">Notification</a></li>
+                        <li><a href="{{ url('/notification2') }}">Notification 2</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -71,6 +73,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/profile') }}">Profile</a></li>
+
+
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

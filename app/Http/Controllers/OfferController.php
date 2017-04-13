@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Offer;
+use App\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\Builder;
 
 class OfferController extends Controller
 {
@@ -15,26 +19,22 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::with('user')->paginate(5);
-        return view('offer.index', compact('offers'));
+
+        // $offers = Offer::with('user')->paginate(5);
+        // return view('offer.index', compact('offers'));
+
+        $searchResults =Input::get('search');
+        $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
+
+       return view('offer.index', compact('offers'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('offer.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -48,7 +48,12 @@ class OfferController extends Controller
             'info' => 'required|max:455',
         ]);
 
+        $driver = Driver::findOrFail(Auth::user()->id);
+
         $offer = new Offer;
+        $offer->driver_id = $driver->id;
+        // dd($offer);h
+
         $offer->date = $request->date;
         $offer->time = $request->time;
         $offer->destination = $request->destination;
@@ -58,6 +63,7 @@ class OfferController extends Controller
         $offer->pickup_loc = $request->pickup_loc;
         $offer->info = $request->info;
         $offer->user_id = Auth::user()->id;
+        // dd($offer);
         $offer->save();
 
         return redirect()->action('OfferController@store')->withMessage('Ride has been successfully added');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Driver;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -69,7 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'matricNo' => $data['matricNo'],
             'name' => $data['name'],
             'noIc' => $data['noIc'],
@@ -81,5 +82,16 @@ class RegisterController extends Controller
             'faculty' => $data['faculty'],
 
         ]);
+        $user->driver()->create([
+            'user_id' => $user->id,
+            'noLesen' => null,
+            'lesen_luput' => null,
+            'gambar_lesen' => null,
+            'gambar_ic' => null,
+            'no_plat' => null,
+            'jenis_kereta' => null,
+            'roadtax_luput' => null,
+        ]);
+        return $user;
     }
 }

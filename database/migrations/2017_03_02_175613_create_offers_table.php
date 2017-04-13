@@ -15,6 +15,8 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('driver_id')->unsigned();
             $table->string('date');
             $table->string('time');
             $table->string('destination');
@@ -25,11 +27,11 @@ class CreateOffersTable extends Migration
             $table->string('info');
             // $table->string('destination');
             // $table->string('price');
-            $table->integer('user_id')->unsigned();;
             $table->timestamps();
 
             //foreign key
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('driver_id')->references('id')->on('drivers');
         });
     }
 

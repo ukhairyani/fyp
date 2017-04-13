@@ -7,6 +7,13 @@
     </div>
 
     <div class="panel-body">
+        <div class="col-md-12">
+            <form class="form-inline text-center" method="get" action="{{ url('catalog') }}">
+                <input class="form-control" type="text" placeholder="Search your destination" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -17,11 +24,8 @@
                                 <th width="10%">Date</th>
                                 <th width="10%">Time</th>
                                 <th width="25%">Destination</th>
-                                {{-- <th width="10%">Estimate Duration</th> --}}
                                 <th width="10%">Price (RM)</th>
                                 <th width="10%">No of Seat</th>
-                                {{-- <th width="20%">Pickup Location</th>
-                                <th width="20%">Additional Info</th> --}}
                                 <th width="15%">Driver's Name</th>
                                 <th width="10%">Driver's Gender</th>
                                 <th width="10%">Action</th>
@@ -30,8 +34,10 @@
                         <tbody pull-{right}>
                             <?php $i = 0 ?>
 
-                            @foreach($offers as $offer)
+                            @forelse($offers as $offer)
                                 <tr>
+                                    @if ($offer->seat > 0)
+
                                     <td>{{ $offers->firstItem() + $i }}</td>
                                     <td>{{ $offer->date }}</td>
                                     <td>{{ $offer->time }}</td>
@@ -40,19 +46,20 @@
                                     <td>{{ $offer->seat }}</td>
                                     <td>{{ $offer->user->name }}</td>
                                     <td>{{ $offer->user->gender }}</td>
-
-                                    <td><a href="{{ action('BooksController@book',   $offer->id) }}" class="btn btn-info" role="button">Details</a></td>
-
-                                    @if( $offer->user_id == Auth::user()->id)
                                     @endif
+
+                                    @if( $offer->user_id != Auth::user()->id)
+                                    <td>
+                                        <td><a href="{{ action('BooksController@create',   $offer->id) }}" class="btn btn-info" role="button">Details</a></td>
+                                    @endif
+                                    </td>
                                 </tr>
-
-
                             <?php $i++ ?>
-                            @endforeach
-
-
-
+                            @empty
+                            <tr>
+                                <td colspan="6">Looks like there is no ride available.</td>
+                            </tr>
+                        @endforelse
 
                         </tbody>
 
