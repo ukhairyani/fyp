@@ -16,10 +16,12 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('driver_id')->unsigned();
             $table->integer('offer_id')->unsigned();
             $table->string('nama_waris');
             $table->string('tel_waris');
             $table->string('email_waris');
+            $table->string('drop_off');
             $table->integer('kekerapan_notifikasi');
             $table->string('status_book')->default('Processing');
             $table->string('status_sah')->default('Pending');

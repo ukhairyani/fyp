@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Offer;
 use App\Driver;
+use App\Book;
+use App\State;
+use App\District;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,16 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class OfferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
-        // $offers = Offer::with('user')->paginate(5);
-        // return view('offer.index', compact('offers'));
 
         $searchResults =Input::get('search');
         $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
@@ -30,75 +25,91 @@ class OfferController extends Controller
 
     }
 
+    public function ajax()
+    {
+      $state_id = Input::get('state_id');
+      $district = District::where('state_id', '=', $state_id)->get();
+
+      return \Response::json($district);
+    }
+
     public function create()
     {
-        return view('offer.create');
-    }
+        $states = State::all();
+        // dd($states);
+        return view('offer.create')->with('states', $states);    }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
-            'destination' => 'required|max:45',
+            'state' => 'required',
+            'district' => 'required',
+            // 'destination' => 'required|max:45',
             'est_duration' => 'required|max:45',
             'price' => 'required|max:10',
             'seat' => 'required|max:10',
             'pickup_loc' => 'required|max:45',
             'info' => 'required|max:455',
+            'instant' => 'required|max:5',
         ]);
 
         $driver = Driver::findOrFail(Auth::user()->id);
 
-        $offer = new Offer;
-        $offer->driver_id = $driver->id;
-        // dd($offer);h
+        foreach ($driver->offer as $offer) {
+            if($offer->date == $request->date) {
+                if($offer->time == $request->time){
+                    return redirect()->action('OfferController@create')->withErrors('Ride existed' )->withInput();
+                }
+            }
 
-        $offer->date = $request->date;
-        $offer->time = $request->time;
-        $offer->destination = $request->destination;
-        $offer->est_duration = $request->est_duration;
-        $offer->price = $request->price;
-        $offer->seat = $request->seat;
-        $offer->pickup_loc = $request->pickup_loc;
-        $offer->info = $request->info;
-        $offer->user_id = Auth::user()->id;
-        // dd($offer);
-        $offer->save();
+            }
+            $offer = new Offer;
+            $offer->driver_id = $driver->id;
 
-        return redirect()->action('OfferController@store')->withMessage('Ride has been successfully added');
+            $offer->date = $request->date;
+            $offer->time = $request->time;
+            $offer->state_id = $request->state;
+            $offer->district_id = $request->district;
+
+            $state_name = State::where('id', $request->state)->first();
+            $district_name = District::where('id', $request->district)->first();
+            $offer->destination = $district_name->name.$state_name->name;
+
+            $duration_hour = $request->est_duration_hour*60;    //convert hour to minute
+            $total_duration = $request->est_duration + $duration_hour;  //sum hour & min (in minute)
+            $offer->est_duration = $total_duration;
+
+            $offer->price = $request->price;
+            $offer->seat = $request->seat;
+            $offer->pickup_loc = $request->pickup_loc;
+            $offer->info = $request->info;
+            $offer->instant = $request->instant;
+            $offer->user_id = Auth::user()->id;
+            // dd($offer);
+            $offer->save();
+
+            return redirect()->action('OfferController@store')->withMessage('Ride has been successfully added');
+
+        // dd($driver->offer);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\c  $c
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(c $c)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\c  $c
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $offer = Offer::findOrFail($id);
-        return view('offer.edit', compact('offer'));
+        $states = State::all();
+        return view('offer.edit', compact('offer'))->with('states', $states);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\c  $c
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -110,28 +121,30 @@ class OfferController extends Controller
             'seat' => 'required',
             'pickup_loc' => 'required',
             'info' => 'required',
+            'instant' => 'required|max:5',
+
         ]);
 
         $offer = Offer::findOrFail($id);
         $offer->date = $request->date;
         $offer->time = $request->time;
         $offer->destination = $request->destination;
-        $offer->est_duration = $request->est_duration;
+
+        $duration_hour = $request->est_duration_hour*60;    //convert hour to minute
+        $total_duration = $request->est_duration + $duration_hour;  //sum hour & min (in minute)
+        $offer->est_duration = $total_duration;
+
         $offer->price = $request->price;
         $offer->seat = $request->seat;
         $offer->pickup_loc = $request->pickup_loc;
         $offer->info = $request->info;
+        $offer->instant = $request->instant;
+
         $offer->save();
 
         return redirect()->action('OfferController@index')->withMessage('Ride has been successfully updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\c  $c
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $offer = Offer::findOrFail($id);

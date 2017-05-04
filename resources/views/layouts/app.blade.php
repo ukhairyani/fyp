@@ -28,6 +28,38 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous">
+
+    </script>
+
+
+<script >
+          $( document ).ready(function() {
+          $( "#states" ).change(function(e){
+            console.log(e);
+            // alert( "Handler for .change() called." );
+              var state_id = e.target.value;
+      //ajax
+        $.get('/ajax-district?state_id=' + state_id, function(data){
+            //success data
+            // $('#district').empty();
+            $('#district').find("option:not(:first)").remove();
+            $.each(data, function(index, districtObj){
+
+              $('#district').append('<option value="' + districtObj.id+ '"> '+ districtObj.name + '</option>');
+
+            });
+
+        });
+        });
+
+      });
+    </script>
+
+
 </head>
 <body>
     <div id="app">
@@ -56,8 +88,20 @@
                         <li><a href="{{ url('/home') }}" class="glyphicon glyphicon-home">Home</a></li>
                         <li><a href="{{ url('/offer') }}" class="glyphicon glyphicon-map-marker">Offer Ride</a></li>
                         <li><a href="{{ url('/catalog') }}">Catalog</a></li>
-                        <li><a href="{{ url('/notification') }}">Notification</a></li>
-                        <li><a href="{{ url('/notification2') }}">Notification 2</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notification</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/notification') }}">Booking Request</a></li>
+                                <li><a href="{{ url('/confirmation') }}">Ride Confirmation</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Give Feedback</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/driver_list') }}">Your Driver</a></li>
+                                <li><a href="{{ url('/passenger_list') }}">Your Passenger</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,7 +118,6 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('/profile') }}">Profile</a></li>
-
 
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -141,6 +184,9 @@
             $('#destroy-modal').modal({ show: true });
         });
     </script>
+
+    <script src="{{ asset('js/add-image.js') }}"></script>
+    @yield('scripts')
 
 </body>
 </html>

@@ -31,6 +31,7 @@
                                 <th width="5%">No of Seat</th>
                                 <th width="20%">Pickup Location</th>
                                 <th width="20%">Additional Info</th>
+                                <th width="5%">Instant Booking</th>
                                 <th width="10%">By</th>
                                 <th width="10%">Action</th>
                             </tr>
@@ -48,11 +49,12 @@
                                     </td>
                                     <td>{{ $offer->time }}</td>
                                     <td>{{ $offer->destination }}</td>
-                                    <td>{{ $offer->est_duration }}</td>
+                                    <td>{{ gmdate("H:i", $offer->est_duration*60) }}</td>
                                     <td>{{ $offer->price }}</td>
                                     <td>{{ $offer->seat }}</td>
                                     <td>{{ $offer->pickup_loc }}</td>
                                     <td>{{ $offer->info }}</td>
+                                    <td>{{ $offer->instant }}</td>
                                     <td>{{ $offer->user->name }}</td>
                                     <td>
                                     @if( $offer->user_id == Auth::user()->id)
@@ -70,7 +72,10 @@
                             @endforelse
                         </tbody>
                     </table>
-                {{ $offers->links() }}
+
+                    <div class="col-sm-offset-5">
+                        {{ $offers->links() }}
+                    </div>
             </div>
         </div>
     </div>

@@ -38,6 +38,59 @@
                         </div>
                     </div>
 
+                    <div class="form-group{{ $errors->has('seat') ? ' has-error' : '' }}">
+                        <label for="seat" class="col-md-4 control-label">No of Seat</label>
+
+                        <div class="col-md-3">
+                            <select id="seat" type="text" class="form-control" name="seat" required autofocus>
+                              <option value="{{ $offer->seat }}" selected="">{{ $offer->seat }}</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                            </select>
+
+                            @if ($errors->has('seat'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('seat') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
+                        <label for="state" class="col-md-4 control-label">Destination</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control input-sm" name="state" id="states" required>
+                                @foreach($states as $state )
+                                    {{-- <option value="{{ $state->id }}" selected="">{{ $state->id }}</option> --}}
+                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('state'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('state') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                      <label class="col-md-4 control-label"></label>
+
+                          <div class="col-md-6">
+                              <select class="form-control input-sm" name="district" id="district" required>
+                                  <option value="0" disabled selected>Select District</option>
+                              </select>
+                              @if ($errors->has('district'))
+                                  <span class="help-block">
+                                      <strong>{{ $errors->first('district') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('destination') ? ' has-error' : '' }}">
                         <label for="destination" class="col-md-4 control-label">Destination</label>
 
@@ -55,16 +108,36 @@
                     <div class="form-group{{ $errors->has('est_duration') ? ' has-error' : '' }}">
                         <label for="est_duration" class="col-md-4 control-label">Estimate Duration</label>
 
-                        <div class="col-md-6">
-                            <input id="est_duration" type="text" class="form-control" name="est_duration" value="{{ $offer->est_duration }}" required autofocus>
+                        <div class="form-field">
 
-                            @if ($errors->has('est_duration'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('est_duration') }}</strong>
-                                </span>
-                            @endif
+                            <div class="form-field">
+                                <div class="col-md-2">
+                                    <input id="est_duration_hour" type="number" min="0" class="form-control" name="est_duration_hour" value="{{ floor($offer->est_duration/60) }}" required autofocus>
+                                </div>
+                                <div><label for="est_duration_hour" class="col-md-1 control-label" style="text-align:left">Hour</label></div>
+                            </div>
+
+                            <div class="form-field">
+                                <div class="col-md-2">
+                                    <input id="est_duration" type="number" min="0" max="59" class="form-control" name="est_duration" value="{{ $offer->est_duration%60 }}" required autofocus>
+                                </div>
+                                <div><label for="est_duration" class="col-md-1 control-label" style="text-align:left">Minute</label></div>
+                            </div>
+
+                                @if ($errors->has('est_duration_hour'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('est_duration_hour') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('est_duration'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('est_duration') }}</strong>
+                                    </span>
+                                @endif
+
                         </div>
                     </div>
+
 
                     <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                         <label for="price" class="col-md-4 control-label">Price (RM/passenger)</label>
@@ -123,6 +196,22 @@
                             @if ($errors->has('info'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('info') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('pickup_loc') ? ' has-error' : '' }}">
+                        <label for="pickup_loc" class="col-md-4 control-label">Do you want to accept instant booking?</label>
+
+                        <div class="col-md-6">
+                            <input id="instant" type="radio" name="instant" value="Yes" <?php echo ($offer->instant == 'Yes') ?  "checked" : "" ;  ?>/ required > Yes
+                            <br>
+                            <input id="instant" type="radio" name="instant" value="No" <?php echo ($offer->instant == 'No') ?  "checked" : "" ;  ?>/ required > No
+
+                            @if ($errors->has('pickup_loc'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('pickup_loc') }}</strong>
                                 </span>
                             @endif
                         </div>

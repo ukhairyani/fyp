@@ -46,12 +46,13 @@
                                     <td>{{ $offer->seat }}</td>
                                     <td>{{ $offer->user->name }}</td>
                                     <td>{{ $offer->user->gender }}</td>
-                                    @endif
 
-                                    @if( $offer->user_id != Auth::user()->id)
                                     <td>
-                                        <td><a href="{{ action('BooksController@create',   $offer->id) }}" class="btn btn-info" role="button">Details</a></td>
+                                    @if( $offer->user_id != Auth::user()->id)
+                                        <a href="{{ action('BooksController@create', $offer->id) }}" class="btn btn-info" role="button">Details</a>
                                     @endif
+                                @endif
+
                                     </td>
                                 </tr>
                             <?php $i++ ?>
@@ -62,6 +63,10 @@
                         @endforelse
 
                         </tbody>
+                    </table>
+                    <div class="col-sm-offset-5">
+                        {{ $offers->links() }}
+                    </div>
 
 
                 </div>

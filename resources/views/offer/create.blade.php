@@ -38,31 +38,68 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('destination') ? ' has-error' : '' }}">
-                        <label for="destination" class="col-md-4 control-label">Destination</label>
+                    <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
+                        <label for="state" class="col-md-4 control-label">Destination</label>
 
                         <div class="col-md-6">
-                            <input id="destination" type="text" class="form-control" name="destination" value="{{ old('destination') }}" required autofocus>
-
-                            @if ($errors->has('destination'))
+                            <select class="form-control input-sm" name="state" id="states" required>
+                                <option value="0" disabled selected>Select State</option>
+                                @foreach($states as $state )
+                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('state'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('destination') }}</strong>
+                                    <strong>{{ $errors->first('state') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
+                    <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                      <label class="col-md-4 control-label"></label>
+
+                          <div class="col-md-6">
+                              <select class="form-control input-sm" name="district" id="district" required>
+                                  <option value="0" disabled selected>Select District</option>
+                              </select>
+                              @if ($errors->has('district'))
+                                  <span class="help-block">
+                                      <strong>{{ $errors->first('district') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('est_duration') ? ' has-error' : '' }}">
                         <label for="est_duration" class="col-md-4 control-label">Estimate Duration</label>
 
-                        <div class="col-md-6">
-                            <input id="est_duration" type="text" class="form-control" name="est_duration" value="{{ old('est_duration') }}" required autofocus>
+                        <div class="form-field">
+                            <div class="form-field">
+                                <div class="col-md-2">
+                                    <input id="est_duration_hour" type="number" min="0" class="form-control" name="est_duration_hour" value="{{ old('est_duration_hour') }}" required autofocus>
+                                </div>
+                                <div><label for="est_duration_hour" class="col-md-1 control-label" style="text-align:left">Hour</label></div>
+                            </div>
 
-                            @if ($errors->has('est_duration'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('est_duration') }}</strong>
-                                </span>
-                            @endif
+                            <div class="form-field">
+                                <div class="col-md-2">
+                                    <input id="est_duration" type="number" min="0" max="59" class="form-control" name="est_duration" value="{{ old('est_duration') }}" required autofocus>
+                                </div>
+                                <div><label for="est_duration" class="col-md-1 control-label" style="text-align:left">Minute</label></div>
+                            </div>
+
+                                @if ($errors->has('est_duration_hour'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('est_duration_hour') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('est_duration'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('est_duration') }}</strong>
+                                    </span>
+                                @endif
+
                         </div>
                     </div>
 
@@ -127,6 +164,26 @@
                             @endif
                         </div>
                     </div>
+
+                    <div class="form-group{{ $errors->has('pickup_loc') ? ' has-error' : '' }}">
+                        <label for="pickup_loc" class="col-md-4 control-label">Do you want to accept instant booking?</label>
+
+                        <div class="col-md-6">
+                            <input id="instant" type="radio" name="instant" value="Yes" required > Yes
+                            <br>
+                            <input id="instant" type="radio" name="instant" value="No" required > No
+
+                            @if ($errors->has('pickup_loc'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('pickup_loc') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+
+
+
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">

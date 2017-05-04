@@ -36,11 +36,15 @@
                                        </div>
                                    </div>
 
-                                   <div class="form-group"><label class="col-sm-2 control-label">IC Image</label>
-                                       <div class="col-sm-10">
-                                           <input type="file" class="form-control" name="gambar_ic" value="{{ $driver->gambar_ic }}"></input>
-                                       </div>
-                                   </div>
+                                   <div class="col-xs-12 col-sm-12 col-md-12">
+                                       <div class="form-group">
+                                           <strong>IC Image:</strong><br>
+                                               <input type="file" name="gambar_ic" id="gambar_ic" class="hide">
+                                                   <label for="gambar_ic" style="width: 500px">
+                                                       <img class="image-placeholder" src="{{ $driver->gambar_ic }}" width="50%"/>
+                                                   </label>
+                                        </div>
+                                    </div>
 
                                    <div class="form-group"><label class="col-sm-2 control-label">Car Plat No</label>
                                        <div class="col-sm-10">
@@ -102,7 +106,7 @@
                                     <div class="form-group">
                                      <label class="col-md-2 control-label"></label>
                                      <div class="col-md-4">
-                                         <button type="submit" class="btn btn-primary">Hantar</button>
+                                         <button type="submit" class="btn btn-primary">Save</button>
                                          {{-- <a href="{{ url('/offer/create') }}" class="btn btn-info pull-right" role="button" type="submit">Offer</a> --}}
                                      </div>
                                  </div>
@@ -119,3 +123,6 @@
       </div>
 
   @endsection
+
+  @section('script')
+@endsection

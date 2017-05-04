@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     protected $fillable = [
-        'driver_id', 'date', 'time', 'destination', 'est_duration', 'price', 'seat', 'pickup_loc', 'info'
+        'driver_id', 'date', 'time', 'destination', 'est_duration', 'price', 'seat', 'pickup_loc', 'info', 'instant'
     ];
 
 
@@ -26,6 +26,15 @@ class Offer extends Model
     public function book()
     {
         return $this->hasOne(Book::class);
+    }
+
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
+
+
+    public function district(){
+        return $this->belongsTo(District::class);
     }
 
     // public function likes()

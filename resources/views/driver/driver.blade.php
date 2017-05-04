@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-     <div class="container">
-         <div class="row">
-
-             <br>
+     <div class="panel panel-default">
+         <div class="panel-heading">
+             <h2>Update Driver Account</h2>
          </div>
-
+         <div class="panel-body">
          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
              <div class="panel panel-info" style="margin-top:50px">
                  <div class="panel-heading">
@@ -33,7 +32,7 @@
                             </tr>
                             <tr>
                               <td>IC Image </td>
-                              <td>{{ $driver->gambar_ic }}</td>
+                              <td><div class="col-md-3 col-lg-3" align="center"> <img src="{{ asset("$driver->gambar_ic") }}" class="img-circle img-responsive"> </div></td>
                             </tr>
                             <tr>
                               <td> Car Plat No </td>
@@ -59,18 +58,9 @@
                               <td>Address </td>
                               <td>{{ $driver->user->address }}</td>
                             </tr>
-                            {{-- <tr>
-                              <td>Faculty </td>
-                              <td>{{ $driver->user->faculty }}</td>
-                            </tr> --}}
 
                             <tr><td>
 
-                            @if($driver->user_id == Auth::user()->id)
-                                <a href="{{ action ('DriversController@edit', $driver->user_id) }}" class="btn btn-success">Register</a>
-                            @endif
-
-                            </td></tr>
 
                             @endforeach
 
@@ -79,18 +69,19 @@
 
                         </div>
                     </div>
+
+                    <div class="col-sm-offset-4 col-sm-10">
+
+                    <a href="{{ action ('DriversController@edit', $driver->user_id) }}" class="btn btn-primary">Update</a>
+
+                    <a href="{{ action ('OfferController@index') }}" type="button" class="btn btn-danger"><i class="fa fa-times"></i>Cancel</a>
                 </div>
-
-
-
-                <div class="panel-footer">
-                    <a href="{{ url('home') }}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times"></i>  Keluar</a>
-                </div>
-
+            </div>
 
 
             </div>
         </div>
     </div>
+</div>
 
 @endsection

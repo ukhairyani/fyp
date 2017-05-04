@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Driver extends Model
@@ -15,9 +16,20 @@ class Driver extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function offer()
     {
         return $this->hasMany(Offer::class, 'driver_id');
+    }
+
+    public function book()
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }

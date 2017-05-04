@@ -25,6 +25,7 @@ class CreateOffersTable extends Migration
             $table->integer('seat');
             $table->string('pickup_loc');
             $table->string('info');
+            $table->string('instant');
             // $table->string('destination');
             // $table->string('price');
             $table->timestamps();
