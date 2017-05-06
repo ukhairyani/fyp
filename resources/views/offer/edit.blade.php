@@ -91,7 +91,7 @@
                           </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('destination') ? ' has-error' : '' }}">
+                    {{-- <div class="form-group{{ $errors->has('destination') ? ' has-error' : '' }}">
                         <label for="destination" class="col-md-4 control-label">Destination</label>
 
                         <div class="col-md-6">
@@ -103,7 +103,7 @@
                                 </span>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group{{ $errors->has('est_duration') ? ' has-error' : '' }}">
                         <label for="est_duration" class="col-md-4 control-label">Estimate Duration</label>

@@ -84,6 +84,7 @@ class RegisterController extends Controller
         ]);
         $user->driver()->create([
             'user_id' => $user->id,
+            'gambar_profile' => null,
             'noLesen' => null,
             'lesen_luput' => null,
             'gambar_lesen' => null,

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
+
 
 class OfferController extends Controller
 {
@@ -63,8 +65,13 @@ class OfferController extends Controller
                     return redirect()->action('OfferController@create')->withErrors('Ride existed' )->withInput();
                 }
             }
+        }
 
-            }
+        if($request->date >= $driver->lesen_luput || $request->date >= $driver->roadtax_luput){
+            return redirect()->action('OfferController@create')->withErrors('Your license or road tax has expired on this date')->withInput();
+        }
+
+
             $offer = new Offer;
             $offer->driver_id = $driver->id;
 
@@ -90,7 +97,7 @@ class OfferController extends Controller
             // dd($offer);
             $offer->save();
 
-            return redirect()->action('OfferController@store')->withMessage('Ride has been successfully added');
+            return redirect()->action('OfferController@store')->withMessage('Ride has successfully added');
 
         // dd($driver->offer);
 
@@ -115,7 +122,7 @@ class OfferController extends Controller
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
-            'destination' => 'required',
+            // 'destination' => 'required',
             'est_duration' => 'required',
             'price' => 'required',
             'seat' => 'required',
@@ -127,8 +134,12 @@ class OfferController extends Controller
 
         $offer = Offer::findOrFail($id);
         $offer->date = $request->date;
-        $offer->time = $request->time;
-        $offer->destination = $request->destination;
+        $offer->state_id = $request->state;
+        $offer->district_id = $request->district;
+
+        $state_name = State::where('id', $request->state)->first();
+        $district_name = District::where('id', $request->district)->first();
+        $offer->destination = $district_name->name.$state_name->name;
 
         $duration_hour = $request->est_duration_hour*60;    //convert hour to minute
         $total_duration = $request->est_duration + $duration_hour;  //sum hour & min (in minute)
@@ -142,7 +153,7 @@ class OfferController extends Controller
 
         $offer->save();
 
-        return redirect()->action('OfferController@index')->withMessage('Ride has been successfully updated');
+        return redirect()->action('OfferController@index')->withMessage('Ride has successfully updated');
     }
 
     public function destroy($id)

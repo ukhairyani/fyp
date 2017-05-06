@@ -50,6 +50,9 @@
                 <div class="col-sm-offset-4 col-sm-10">
                     <button id="status_book" name="status_book" value="Accept" type="submit" style="width:15%" class="btn btn-success" >Accept</button>
                     <button id="status_book" name="status_book" value="Reject" type="submit" style="width:15%" class="btn btn-danger" >Reject</button>
+                    <input type="hidden" name="status_sah" value="Invalid">
+
+
                 </div>
             </div>
         </form>

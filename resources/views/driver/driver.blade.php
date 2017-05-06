@@ -13,11 +13,13 @@
                  </div>
                  <div class="panel-body">
                      <div class="row">
-                         <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+
+                         @foreach ($drivers as $driver)
+
+                         <div class="col-md-3 col-lg-3 " align="center"> <img src="{{ asset("$driver->gambar_profile") }}" class="img-circle img-responsive"> </div>
                          <div class=" col-md-9 col-lg-9 ">
                         <table class="table table-user-information">
                           <tbody>
-                            @foreach ($drivers as $driver)
                             <tr>
                               <td>License No </td>
                               <td>{{ $driver->noLesen }}</td>
@@ -28,11 +30,11 @@
                             </tr>
                             <tr>
                               <td>License Image </td>
-                              <td>{{ $driver->gambar_lesen }}</td>
+                              <td><div class="col-md-3 col-lg-3" align="center"> <img src="{{ asset("$driver->gambar_lesen") }}" style="max-height:150px"> </div></td></td>
                             </tr>
                             <tr>
                               <td>IC Image </td>
-                              <td><div class="col-md-3 col-lg-3" align="center"> <img src="{{ asset("$driver->gambar_ic") }}" class="img-circle img-responsive"> </div></td>
+                              <td><div class="col-md-3 col-lg-3" align="center"> <img src="{{ asset("$driver->gambar_ic") }}" style="max-height:150px"> </div></td>
                             </tr>
                             <tr>
                               <td> Car Plat No </td>

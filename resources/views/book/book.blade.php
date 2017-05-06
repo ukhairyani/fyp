@@ -132,6 +132,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
                   <button type="submit" class="btn btn-success">Save</button>
+                  <input type="hidden" name="status_book" value="Accept">
+                  <input type="hidden" name="status_sah" value="Confirm">
+
                 </div>
             </div>
         </form>

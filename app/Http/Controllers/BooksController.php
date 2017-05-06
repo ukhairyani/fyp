@@ -19,11 +19,31 @@ class BooksController extends Controller
     {
         $searchResults =Input::get('search');
         $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
+
+        $current = Carbon::now();
+        // $instant_date = Carbon::parse($offers->date)->subDay();
+        // dd($offers->date);
+        // dd($offers);
+
+
         // $books = Book::findOrFail(Auth::user()->id);
 
         // $offers = Offer::with('user')->paginate(5);
-        return view('book.catalog', compact('offers'));
+        return view('book.catalog', compact('offers', 'current'));
     }
+
+   //  public function index()
+   // {
+   //  $category = Input::get('instant');
+   //  if($category){
+   //          $offers = Offer::where('instant',$category)->paginate(6);
+   //  }
+   //  else{
+   //   $offers = Offer::where('destination','like','%'.Input::get('search').'%')->paginate(5);//search the related item
+   //  }
+   //
+   //  return view('book.catalog', compact('offers'));
+   // }
 
 
     public function create($id)
@@ -66,6 +86,19 @@ class BooksController extends Controller
         $book->user_id = Auth::user()->id;
         $offer->seat = $offer->seat-1;
 
+        $current = Carbon::now();
+        $instant_date = Carbon::parse($offer->date)->subDay();
+        // dd($current->toDateString());
+
+            if ($current->toDateString() == $instant_date->toDateString() && ($offer->instant == "Yes")) {
+
+                $book->status_book = $request->status_book;
+                $book->status_sah = $request->status_sah;
+            }
+
+
+
+
         $book->save();
         $offer->save();
 
@@ -76,12 +109,12 @@ class BooksController extends Controller
     public function show() //show list of booking request in notification
     {
 
-        $books = Book::with('user')->paginate();
+        $books = Book::with('user')->paginate(10);
         return view('book.notification', compact('books'));
 
     }
 
-    public function edit($id) //display booking details
+    public function edit($id) //display booking details for status_book
     {
 
         $book = Book::findOrFail($id);
@@ -105,12 +138,20 @@ class BooksController extends Controller
 
         if($book->status_book == "Reject"){
             $offer->seat = $offer->seat+1;
+            $book->status_sah = "$request->status_sah";
         }
 
         $book->save();
         $offer->save();
 
-        return redirect()->action('BooksController@index')->withMessage('Your booking request will be processed');
+        if($book->status_book == "Accept"){
+            return redirect()->action('BooksController@show')->withMessage('You has accept the booking request');
+        }
+
+        else {
+            return redirect()->action('BooksController@show')->withErrors('You has reject the booking request');
+
+        }
 
     }
 
@@ -125,7 +166,7 @@ class BooksController extends Controller
         return view('book.confirmation', compact('books'));
     }
 
-    public function edit2($id) //display booking details
+    public function edit2($id) //display booking details for status_sah
     {
 
         $current = Carbon::now();
@@ -134,13 +175,14 @@ class BooksController extends Controller
         $offer= Offer::findOrFail($oid);
 
         $invalid = Carbon::parse($offer->date)->subDay();    //a day before ride date
-        //dd($invalid);
         $valid1 = Carbon::parse($offer->date)->subDay(6);
         $valid2 = Carbon::parse($offer->date)->subDay(2);
-        //dd($valid2);
 
         if($invalid->toDateString() <= $current->toDateString())
         {
+            // $book->offer->seat = $book->offer->seat+1;
+            // // dd($book->offer->seat);
+            // $book->save();
             return redirect()->action('BooksController@show2')->withErrors('Sorry! You have exceeded the confirmation date');
         }
 
@@ -157,7 +199,7 @@ class BooksController extends Controller
 
     }
 
-    public function update2(Request $request, $id) //update status_book
+    public function update2(Request $request, $id) //update status_sah
     {
         $this->validate($request, [
             'status_sah' => 'required',
@@ -170,13 +212,15 @@ class BooksController extends Controller
 
         $book->status_sah = $request->status_sah;
 
-    //    dd($request->Input());
 
         $invalid = Carbon::parse($offer->date)->subDay();
-        //dd($invalid);
 
         if($current->toDateString() == $invalid->toDateString())
         {
+            $offer->seat = $offer->seat+1;
+        }
+
+        if($book->status_sah == "Cancel"){
             $offer->seat = $offer->seat+1;
         }
 

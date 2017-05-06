@@ -87,14 +87,15 @@
                         &nbsp;
                         <li><a href="{{ url('/home') }}" class="glyphicon glyphicon-home">Home</a></li>
                         <li><a href="{{ url('/offer') }}" class="glyphicon glyphicon-map-marker">Offer Ride</a></li>
-                        <li><a href="{{ url('/catalog') }}">Catalog</a></li>
+                        <li><a href="{{ url('/catalog') }}" class="glyphicon glyphicon-th-list">Catalog</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notification</a>
+                            <a href="#" class="glyphicon glyphicon-bell" data-toggle="dropdown" role="button" aria-expanded="false">Notification</a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/notification') }}">Booking Request</a></li>
                                 <li><a href="{{ url('/confirmation') }}">Ride Confirmation</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ url('/start') }}">Active Ride</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Give Feedback</a>
                             <ul class="dropdown-menu" role="menu">

@@ -57,45 +57,57 @@ class DriversController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'gambar_profile' => 'required',
+            'noLesen' => 'required',
+            'lesen_luput' => 'required',
+            'gambar_lesen' => 'required',
+            'gambar_ic' => 'required',
+            'no_plat' => 'required',
+            'jenis_kereta' => 'required',
+            'roadtax_luput' => 'required',
+
+        ]);
 
         $user = User::findOrFail($id);
         $driver = Driver::where('user_id', $id)->first();
 
 
-    //     if ($request->hasFile('gambar_ic'))
-    //    {
-    //        $image = '/images/ic_image_' . time() . '.' . $request->gambar_ic->getClientOriginalExtension();
-    //     //    $request->gambar_ic->move(public_path('images/'), $image);
-    //     //    $driver->gambar_ic = $image;
-    //         $pathGambar = $request->file('gambar_ic')->store('images', 'public');
-    //         $driver->gambar_ic = $pathGambar;
-    //     //    dd($pathGambar);
+        if ($request->hasFile('gambar_profile'))
+        {
+           $this->validate($request, [
+              'gambar_profile' => 'required|image'
+          ]);
+           $gambar_profile = 'images/profile/profile_image_' . time() . $driver->id . '.' . $request->gambar_profile->getClientOriginalExtension();
 
+            $request->gambar_profile->move(public_path('images/profile'),$gambar_profile);
+            $driver->gambar_profile = $gambar_profile;
+        }
 
+        if ($request->hasFile('gambar_lesen'))
+        {
+           $this->validate($request, [
+              'gambar_lesen' => 'required|image'
+          ]);
+           $gambar_lesen = 'images/license/license_image_' . time() . $driver->id . '.' . $request->gambar_lesen->getClientOriginalExtension();
 
-    //    }
+            $request->gambar_lesen->move(public_path('images/license'),$gambar_lesen);
+            $driver->gambar_lesen = $gambar_lesen;
+        }
 
-    // if ($request->hasFile('gambar_ic'))
-    //        {
-    //
-    // 			$pathGambar = $request->file('gambar_ic')->store('images', 'public');
-    //
-    //           	$driver->noLesen = $request->noLesen;
-    //         	$driver->lesen_luput = $request->lesen_luput;
-    //         	$driver->gambar_lesen = $request->gambar_lesen;
-    //        		$driver->gambar_ic = $pathGambar;
-    //         	$driver->no_plat = $request->no_plat;
-    //         	$driver->jenis_kereta = $request->jenis_kereta;
-    //         	$driver->roadtax_luput = $request->roadtax_luput;
-    //           	$driver->save();
-    //
-    //           //dd($pathGambar);
-    //
-    //        }
+        if ($request->hasFile('gambar_ic'))
+       {
+           $this->validate($request, [
+              'gambar_ic' => 'required|image'
+          ]);
+           $gambar_ic = 'images/ic/ic_image_' . time() . $driver->id . '.' . $request->gambar_ic->getClientOriginalExtension();
+
+            $request->gambar_ic->move(public_path('images/ic'),$gambar_ic);
+            $driver->gambar_ic = $gambar_ic;
+        }
+
         $driver->noLesen = $request->noLesen;
         $driver->lesen_luput = $request->lesen_luput;
-        $driver->gambar_lesen = $request->gambar_lesen;
-        $driver->gambar_ic = $request->gambar_ic;
         $driver->no_plat = $request->no_plat;
         $driver->jenis_kereta = $request->jenis_kereta;
         $driver->roadtax_luput = $request->roadtax_luput;

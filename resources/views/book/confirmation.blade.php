@@ -27,6 +27,8 @@
                                 <th width="10%">Date</th>
                                 <th width="10%">Time</th>
                                 <th width="10%">Driver Name</th>
+                                <th width="10%">Booking Status</th>
+                                <th width="10%">Confirmation Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -35,7 +37,6 @@
 
                             @forelse($books as $book)
                                 @if( $book->user_id == Auth::user()->id)
-                                    @if($book->status_sah == "Pending" && $book->status_book == "Accept")
 
                                 <tr>
                                     <td>{{ $books->firstItem() + $i }}</td>
@@ -45,7 +46,11 @@
                                     <td>{{ $book->offer->date }}</td>
                                     <td>{{ $book->offer->time }}</td>
                                     <td>{{ $book->driver->user->name }}</td>
+                                    <td>{{ $book->status_book }}</td>
+                                    <td>{{ $book->status_sah }}</td>
 
+
+                                    @if($book->status_book == "Accept" && $book->status_sah == "Pending")
 
                                     <td><a href="{{ action('BooksController@edit2', $book->id) }}" class="btn btn-info" role="button">Details</a></td>
 
@@ -64,6 +69,11 @@
                         @endforelse
 
                         </tbody>
+                    </table>
+
+                    <div class="col-sm-offset-5">
+                        {{ $books->links() }}
+                    </div>
 
 
                 </div>

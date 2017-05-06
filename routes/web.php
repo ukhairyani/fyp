@@ -43,12 +43,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('profiles_passenger/{user_id}/comments', 'CommentpsController@index'); //feedback for passenger
     Route::post('profiles_passenger/', 'CommentpsController@store'); //feedback for passenger
 
-
-    //Route::get('profiles/{user_id}', 'CommentsController@show'); //feedback
-
     Route::get('/driver_list', 'BooksController@show4'); //feedback for driver
     Route::get('profiles/{user_id}/comments', 'CommentdsController@index'); //feedback
     Route::post('profiles/', 'CommentdsController@store'); //feedback
+
+    Route::get('/start', 'StartsController@index');
+    Route::post('/start', 'StartsController@store');
 
     //ajax
     Route::get('/ajax-district', 'OfferController@ajax');

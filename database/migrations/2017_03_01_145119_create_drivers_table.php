@@ -16,6 +16,7 @@ class CreateDriversTable extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->string('gambar_profile')->nullable();
             $table->string('noLesen')->nullable();
             $table->string('lesen_luput')->nullable();
             $table->string('gambar_lesen')->nullable();

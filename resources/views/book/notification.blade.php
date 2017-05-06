@@ -27,6 +27,8 @@
                                 <th width="25%">Ride</th>
                                 <th width="10%">Date</th>
                                 <th width="10%">Time</th>
+                                <th width="10%">Instant Booking</th>
+                                <th width="10%">Booking Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -35,7 +37,6 @@
 
                             @forelse($books as $book)
                                 @if( $book->offer->driver_id == Auth::user()->id)
-                                    @if($book->status_book == "Processing")
 
                                 <tr>
                                     <td>{{ $books->firstItem() + $i }}</td>
@@ -45,7 +46,10 @@
                                     <td>{{ $book->offer->destination }}</td>
                                     <td>{{ $book->offer->date }}</td>
                                     <td>{{ $book->offer->time }}</td>
+                                    <td>{{ $book->offer->instant }}</td>
+                                    <td>{{ $book->status_book }}</td>
 
+                                    @if($book->status_book == "Processing")
 
                                     <td><a href="{{ action('BooksController@edit', $book->id) }}" class="btn btn-info" role="button">Details</a></td>
 
@@ -65,7 +69,10 @@
 
                         </tbody>
 
-
+                    </table>
+                    <div class="col-sm-offset-5">
+                        {{ $books->links() }}
+                    </div>
                 </div>
                 </div>
                 </div>

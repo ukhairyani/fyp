@@ -10,39 +10,26 @@
                 <form class="form-horizontal" action="{{ action('OfferController@store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                        <label for="date" class="col-md-4 control-label">Date</label>
 
-                        <div class="col-md-6">
-                            <input id="date" type="date" class="form-control" name="date" value="{{ old('date') }}" required autofocus>
-
-                            @if ($errors->has('date'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('date') }}</strong>
-                                </span>
-                            @endif
+                        <div class="form-group">
+                            <label for="date" class="col-md-4 control-label">Date</label>
+                                <div class="col-md-6">
+                                    {!! Form::date('date', null, array('placeholder' => 'Ride date','class' => 'form-control')) !!}
+                                </div>
                         </div>
-                    </div>
 
-                    <div class="form-group{{ $errors->has('time') ? ' has-error' : '' }}">
-                        <label for="time" class="col-md-4 control-label">Time</label>
-
-                        <div class="col-md-6">
-                            <input id="time" type="time" class="form-control" name="time" value="{{ old('time') }}" required autofocus>
-
-                            @if ($errors->has('time'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('time') }}</strong>
-                                </span>
-                            @endif
+                        <div class="form-group">
+                            <label for="time" class="col-md-4 control-label">Time</label>
+                                <div class="col-md-6">
+                                    {!! Form::time('time', null, array('placeholder' => 'Ride time','class' => 'form-control')) !!}
+                                </div>
                         </div>
-                    </div>
 
                     <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
                         <label for="state" class="col-md-4 control-label">Destination</label>
 
                         <div class="col-md-6">
-                            <select class="form-control input-sm" name="state" id="states" required>
+                            <select class="form-control" name="state" id="states" required>
                                 <option value="0" disabled selected>Select State</option>
                                 @foreach($states as $state )
                                     <option value="{{ $state->id }}">{{ $state->name }}</option>
@@ -60,7 +47,7 @@
                       <label class="col-md-4 control-label"></label>
 
                           <div class="col-md-6">
-                              <select class="form-control input-sm" name="district" id="district" required>
+                              <select class="form-control" name="district" id="district" required>
                                   <option value="0" disabled selected>Select District</option>
                               </select>
                               @if ($errors->has('district'))
@@ -103,19 +90,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                        <label for="price" class="col-md-4 control-label">Price (RM/passenger)</label>
-
-                        <div class="col-md-3">
-                            <input id="price" type="text" class="form-control" name="price" value="{{ old('price') }}" required autofocus>
-
-                            @if ($errors->has('price'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('price') }}</strong>
-                                </span>
-                            @endif
+                        <div class="form-group">
+                            <label for="price" class="col-md-4 control-label">Price</label>
+                                <div class="col-md-6">
+                                    {!! Form::text('price', null, array('placeholder' => 'Price per passenger (RM)','class' => 'form-control')) !!}
+                                </div>
                         </div>
-                    </div>
+
+                        {{-- <div class="form-group">
+                            <label for="seat" class="col-md-4 control-label">No of Seat</label>
+                                <div class="col-md-6">
+                                    {{ Form::select('seat', ['0' =>'Please Select' ,'1' => '1', '2' => '2', '3' => '3','4' => '4'], null, ['class' => 'form-control']) }}
+                                </div>
+                            </div> --}}
+
 
                     <div class="form-group{{ $errors->has('seat') ? ' has-error' : '' }}">
                         <label for="seat" class="col-md-4 control-label">No of Seat</label>
