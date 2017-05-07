@@ -46,7 +46,7 @@
                                        </div>
                                    </div>
 
-                                   {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                                   <div class="col-xs-12 col-sm-12 col-md-12">
                                        <div class="form-group">
                                            <strong>License Image:</strong><br>
                                                <input type="file" name="gambar_lesen" id="gambar_lesen" class="hide">
@@ -54,7 +54,7 @@
                                                        <img class="image-placeholder" src="{{ $driver->gambar_lesen }}" width="50%"/>
                                                    </label>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="form-group"><label class="col-sm-2 control-label">License Image</label>
                                         <div class="col-sm-10">

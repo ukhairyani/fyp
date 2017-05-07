@@ -21,6 +21,11 @@ class BooksController extends Controller
         $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
 
         $current = Carbon::now();
+
+        foreach ($offers as $offer) {
+            $date = $offer->date;
+            // dd($date);
+        }
         // $instant_date = Carbon::parse($offers->date)->subDay();
         // dd($offers->date);
         // dd($offers);

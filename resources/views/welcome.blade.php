@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Tour a Travel Category Flat Bootstrap Responsive  Website Template | Home :: w3layouts</title>
+<title>UKM Carpool | Home</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.0.min.js"></script>
@@ -134,6 +134,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 				<ul class="res">
 					<li><a class="active" href="index.html">Home</a></li>
 					<li><a href="about.html">About</a></li>
+					<li><a href="{{ url('/offer') }}">Offer Ride</a></li>
 					<li><a href="hotel.html">Hotel</a></li>
 					<li><a href="shortcodes.html">Shortcodes</a></li>
 					<li><a href="gallery.html">Gallery</a></li>

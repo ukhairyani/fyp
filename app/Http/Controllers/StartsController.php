@@ -19,20 +19,20 @@ class StartsController extends Controller
         //
     }
 
-    function sendemail()
-{
-    var url = '/mail.php';
-
-    new Ajax.Request(url,{
-            onComplete:function(transport)
-            {
-                var feedback = transport.responseText.evalJSON();
-                if(feedback.result==0)
-                    alert('There was a problem sending the email, please try again.');
-            }
-        });
-
-}
+//     function sendemail()
+// {
+//     var url = '/mail.php';
+//
+//     new Ajax.Request(url,{
+//             onComplete:function(transport)
+//             {
+//                 var feedback = transport.responseText.evalJSON();
+//                 if(feedback.result==0)
+//                     alert('There was a problem sending the email, please try again.');
+//             }
+//         });
+//
+// }
 
     public function store(Request $request)
     {

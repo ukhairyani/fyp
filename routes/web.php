@@ -54,6 +54,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ajax-district', 'OfferController@ajax');
     Route::get('/ajax-subdistrict', 'OfferController@ajax2');
 
+    Route::get('test', function () {
+        $timestamp = Carbon\Carbon::now();
+        $user = auth()->user();
+        $user->notify(new App\Notifications\HantarEmel($timestamp));
+    })->name('email.test');
+
 
 });
 
