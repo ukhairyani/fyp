@@ -18,21 +18,21 @@
                                    {{ csrf_field() }}
                                    {{ method_field('PATCH') }}
 
-                                   {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                                   <div class="col-xs-12 col-sm-12 col-md-12">
                                        <div class="form-group">
                                            <strong>Profile Image:</strong><br>
                                                <input type="file" name="gambar_profile" id="gambar_profile" class="hide">
                                                    <label for="gambar_profile" style="width: 500px">
-                                                       <img class="image-placeholder" src="{{ $driver->gambar_profile }}" width="50%"/>
+                                                       <img class="image-placeholder" id="gambar_profile_img" src="{{ asset("$driver->gambar_profile") }}" width="50%"/>
                                                    </label>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
-                                   <div class="form-group"><label class="col-sm-2 control-label">Profile Image</label>
+                                   {{-- <div class="form-group"><label class="col-sm-2 control-label">Profile Image</label>
                                        <div class="col-sm-10">
                                            <input type="file" class="form-control" name="gambar_profile" src="{{ $driver->gambar_profile }}"></input>
                                        </div>
-                                   </div>
+                                   </div> --}}
 
                                    <div class="form-group"><label class="col-sm-2 control-label">License No</label>
                                        <div class="col-sm-10">
@@ -51,32 +51,32 @@
                                            <strong>License Image:</strong><br>
                                                <input type="file" name="gambar_lesen" id="gambar_lesen" class="hide">
                                                    <label for="gambar_lesen" style="width: 500px">
-                                                       <img class="image-placeholder" src="{{ $driver->gambar_lesen }}" width="50%"/>
+                                                       <img class="image-placeholder" id="gambar_lesen_img" src="{{ asset("$driver->gambar_lesen") }}" width="50%"/>
                                                    </label>
                                         </div>
                                     </div>
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">License Image</label>
+                                    {{-- <div class="form-group"><label class="col-sm-2 control-label">License Image</label>
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control" name="gambar_lesen" src="{{ $driver->gambar_lesen }}"></input>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                   {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                                   <div class="col-xs-12 col-sm-12 col-md-12">
                                        <div class="form-group">
                                            <strong>IC Image:</strong><br>
                                                <input type="file" name="gambar_ic" id="gambar_ic" class="hide">
                                                    <label for="gambar_ic" style="width: 500px">
-                                                       <img class="image-placeholder" src="{{ $driver->gambar_ic }}" width="50%"/>
+                                                       <img class="image-placeholder" id="gambar_ic_img" src="{{ asset("$driver->gambar_ic") }}" width="50%"/>
                                                    </label>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">IC Image</label>
+                                    {{-- <div class="form-group"><label class="col-sm-2 control-label">IC Image</label>
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control" name="gambar_ic" src="{{ $driver->gambar_ic }}"></input>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                    <div class="form-group"><label class="col-sm-2 control-label">Car Plat No</label>
                                        <div class="col-sm-10">

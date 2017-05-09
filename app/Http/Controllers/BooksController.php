@@ -15,40 +15,47 @@ use Carbon\Carbon;
 
 class BooksController extends Controller
 {
+    // public function index()
+    // {
+    //     $searchResults =Input::get('search');
+    //     $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
+    //
+    //     $current = Carbon::now();
+    //
+    //     foreach ($offers as $offer) {
+    //         $date = $offer->date;
+    //         // dd($date);
+    //     }
+    //     // $instant_date = Carbon::parse($offers->date)->subDay();
+    //     // dd($offers->date);
+    //     // dd($offers);
+    //
+    //
+    //     // $books = Book::findOrFail(Auth::user()->id);
+    //
+    //     // $offers = Offer::with('user')->paginate(5);
+    //     return view('book.catalog', compact('offers', 'current'));
+    // }
+
     public function index()
+   {
+    $category = Input::get('gender');
+
+    $offers = null;
+
+    if($category)
     {
-        $searchResults =Input::get('search');
-        $offers = Offer::where('destination','like','%'.$searchResults.'%')->paginate(5);
-
-        $current = Carbon::now();
-
-        foreach ($offers as $offer) {
-            $date = $offer->date;
-            // dd($date);
-        }
-        // $instant_date = Carbon::parse($offers->date)->subDay();
-        // dd($offers->date);
-        // dd($offers);
-
-
-        // $books = Book::findOrFail(Auth::user()->id);
-
-        // $offers = Offer::with('user')->paginate(5);
-        return view('book.catalog', compact('offers', 'current'));
+        $offers = User::where('gender', 'like' ,"%$category%")->paginate(6);
+    }
+    else
+    {
+        $offers = Offer::where('destination','like','%'.Input::get('search').'%')->paginate(5);//search the related item
     }
 
-   //  public function index()
-   // {
-   //  $category = Input::get('instant');
-   //  if($category){
-   //          $offers = Offer::where('instant',$category)->paginate(6);
-   //  }
-   //  else{
-   //   $offers = Offer::where('destination','like','%'.Input::get('search').'%')->paginate(5);//search the related item
-   //  }
-   //
-   //  return view('book.catalog', compact('offers'));
-   // }
+    // dd($offers);
+
+    return view('book.catalog', compact('offers'));
+   }
 
 
     public function create($id)

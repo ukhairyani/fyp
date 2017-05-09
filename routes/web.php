@@ -48,17 +48,21 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('profiles/', 'CommentdsController@store'); //feedback
 
     Route::get('/start', 'StartsController@index');
-    Route::post('/start', 'StartsController@store');
+    Route::get('/start/{book}', 'StartsController@create');
+
+    Route::get('/report', 'OfferController@report');
+
+
 
     //ajax
     Route::get('/ajax-district', 'OfferController@ajax');
     Route::get('/ajax-subdistrict', 'OfferController@ajax2');
 
-    Route::get('test', function () {
-        $timestamp = Carbon\Carbon::now();
-        $user = auth()->user();
-        $user->notify(new App\Notifications\HantarEmel($timestamp));
-    })->name('email.test');
+    // Route::get('test', function () {
+    //     $timestamp = Carbon\Carbon::now();
+    //     $user = auth()->user();
+    //     $user->notify(new App\Notifications\HantarEmel($timestamp));
+    // })->name('email.test');
 
 
 });
@@ -66,3 +70,8 @@ Route::group(['middleware' => ['auth']], function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('datatables', function () {
+    $users =  App\User::all();
+    return view('datatable', compact('users'));
+});

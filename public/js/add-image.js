@@ -1,21 +1,17 @@
 $(document).ready(function() {
 
-    $("#gambar_profile").change(function(){
+    $("#gambar_profile").on('change', function(){
       updatePlacholder1(this);
     });
 
-    $("#gambar_lesen").change(function(){
+    $("#gambar_lesen").on('change', function(){
       updatePlacholder2(this);
     });
 
 
-  $("#gambar_ic").change(function(){
+  $("#gambar_ic").on('change', function(){
     updatePlacholder3(this);
   });
-
-
-
-
 
 
   // file upload
@@ -24,7 +20,7 @@ $(document).ready(function() {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        $('.image-placeholder').attr('src', e.target.result);
+        $('#gambar_profile_img').attr('src', e.target.result);
       }
 
       reader.readAsDataURL(input.files[0]);
@@ -36,7 +32,7 @@ $(document).ready(function() {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        $('.image-placeholder2').attr('src', e.target.result);
+        $('#gambar_lesen_img').attr('src', e.target.result);
       }
 
       reader.readAsDataURL(input.files[0]);
@@ -48,7 +44,7 @@ $(document).ready(function() {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        $('.image-placeholder2').attr('src', e.target.result);
+        $('#gambar_ic_img').attr('src', e.target.result);
       }
 
       reader.readAsDataURL(input.files[0]);

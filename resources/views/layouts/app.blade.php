@@ -103,6 +103,8 @@
                                 <li><a href="{{ url('/passenger_list') }}">Your Passenger</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ url('/report') }}">Report</a></li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

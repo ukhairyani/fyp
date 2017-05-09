@@ -18,12 +18,12 @@ class DriversController extends Controller
         $drivers = Driver::where('user_id',Auth::user()->id)->get();
         $current = Carbon::now();
 
-        if($drivers->first()->noLesen == "" || $drivers->first()->lesen_luput <= $current || $drivers->first()->roadtax_luput <= $current){
+        // if($drivers->first()->noLesen == "" || $drivers->first()->lesen_luput <= $current || $drivers->first()->roadtax_luput <= $current){
             return view ('driver.driver', compact('drivers'));
-        }
-        $states = State::all();
-        // dd($states);
-        return view('offer.create')->with('states', $states);
+        // }
+        // $states = State::all();
+        // // dd($states);
+        // return view('offer.create')->with('states', $states);
 
     }
 
@@ -57,12 +57,13 @@ class DriversController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->input());
         $this->validate($request, [
-            'gambar_profile' => 'required',
+            // 'gambar_profile' => 'required',
             'noLesen' => 'required',
             'lesen_luput' => 'required',
-            'gambar_lesen' => 'required',
-            'gambar_ic' => 'required',
+            // 'gambar_lesen' => 'required',
+            // 'gambar_ic' => 'required',
             'no_plat' => 'required',
             'jenis_kereta' => 'required',
             'roadtax_luput' => 'required',

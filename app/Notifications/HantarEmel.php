@@ -12,15 +12,31 @@ class HantarEmel extends Notification
     use Queueable;
 
     protected $timestamp;
+    protected $nama_waris;
+    protected $nama_penumpang;
+    protected $drop_off;
+    protected $destination;
+    protected $pickup_loc;
+    protected $nama_driver;
+    protected $tel_driver;
+    protected $eta;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($timestamp)
+    public function __construct($timestamp, $nama_waris, $nama_penumpang, $drop_off, $destination, $pickup_loc, $nama_driver, $tel_driver, $eta)
     {
         $this->timestamp = $timestamp;
+        $this->nama_waris = $nama_waris;
+        $this->nama_penumpang = $nama_penumpang;
+        $this->drop_off = $drop_off;
+        $this->destination = $destination;
+        $this->pickup_loc = $pickup_loc;
+        $this->nama_driver = $nama_driver;
+        $this->tel_driver = $tel_driver;
+        $this->eta = $eta;
     }
 
     /**
@@ -43,8 +59,14 @@ class HantarEmel extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->timestamp)
-                    ->line('The introduction to the notification.')
+                    ->greeting("Hello {$this->nama_waris}")
+                    ->line("{$this->nama_penumpang} has started ride at {$this->timestamp}")
+                    ->line("Below are the details of the ride:")
+                    ->line("To: {$this->drop_off}, {$this->destination}")
+                    ->line("From: {$this->pickup_loc}")
+                    ->line("ETA: {$this->eta}")
+                    ->line("Driver Name: {$this->nama_driver}")
+                    ->line("Driver Tel No: {$this->tel_driver}")
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

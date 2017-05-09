@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
+use Charts;
 
 
 class OfferController extends Controller
@@ -161,5 +162,22 @@ class OfferController extends Controller
         $offer = Offer::findOrFail($id);
         $offer->delete();
         return back()->withError('Post has been successfully deleted');
+    }
+
+    public function report()
+    {
+      $chart = Charts::database(Offer::all(), 'bar', 'highcharts')
+      ->elementLabel("Total")
+      ->dimensions(1000, 500)
+      ->responsive(false)
+      ->groupByMonth('2017', true);
+
+    //   $char = Charts::database(Tempahan::all(), 'bar', 'highcharts')
+    //   ->elementLabel("Total")
+    //   ->dimensions(1000, 500)
+    //   ->responsive(false)
+    //   ->groupByMonth('2017', true);
+        // return view('laporan.index', ['chart' => $chart], ['char' => $char]);
+        return view('report', ['chart' => $chart]);
     }
 }
