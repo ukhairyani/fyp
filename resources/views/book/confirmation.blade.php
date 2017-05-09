@@ -53,12 +53,18 @@
                                     @if($book->status_book == "Accept" && $book->status_sah == "Pending")
 
                                     <td><a href="{{ action('BooksController@edit2', $book->id) }}" class="btn btn-info" role="button">Details</a></td>
+                                    @endif
+
+                                    @if($book->status_book == "Accept" && $book->status_sah == "Confirm")
+
+                                    <td><a href="{{ action('BooksController@invoice', $book->id) }}" class="btn btn-success" role="button">Invoice</a></td>
+                                    @endif
+
 
 
                                 </tr>
 
                                 <?php $i++ ?>
-                            @endif
                         @endif
 
                             @empty

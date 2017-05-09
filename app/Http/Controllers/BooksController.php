@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\PDF;
 
 class BooksController extends Controller
 {
@@ -102,10 +103,11 @@ class BooksController extends Controller
         $instant_date = Carbon::parse($offer->date)->subDay();
         // dd($current->toDateString());
 
+            //instant booking
             if ($current->toDateString() == $instant_date->toDateString() && ($offer->instant == "Yes")) {
 
-                $book->status_book = $request->status_book;
-                $book->status_sah = $request->status_sah;
+                $book->status_book = $request->status_book;     //accept
+                $book->status_sah = $request->status_sah;       //confirm
             }
 
 
@@ -150,7 +152,7 @@ class BooksController extends Controller
 
         if($book->status_book == "Reject"){
             $offer->seat = $offer->seat+1;
-            $book->status_sah = "$request->status_sah";
+            $book->status_sah = $request->status_sah;       //invalid
         }
 
         $book->save();
@@ -239,7 +241,7 @@ class BooksController extends Controller
         $book->save();
         $offer->save();
 
-        return redirect()->action('BooksController@index')->withMessage('Your booking request will be processed');
+        return redirect()->action('BooksController@index')->withMessage('You has accept the ride');
 
     }
 
@@ -255,6 +257,19 @@ class BooksController extends Controller
     {
         $books = Book::with('user')->paginate();
         return view('feedback.driver_list', compact('books'));
+    }
+
+    public function invoice($id)
+    {
+        $book = Book::findOrFail($id);
+        return view('invoice.invoice', compact('book'));
+    }
+
+    public function showReceiptPDF($id) {
+        $book = Book::findOrFail($id);
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('invoice.invoice_form',compact('book'));
+        return $pdf->stream('invoice.pdf');
     }
 
 }

@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/booking/{booking}', 'BooksController@update');
 
     Route::get('/confirmation', 'BooksController@show2');
-    Route::get('/confirmation/{confirmation}/details', 'BooksController@edit2'); //notification
+    Route::get('/confirmation/{confirmation}/details', 'BooksController@edit2');    //notification
     Route::patch('/confirmation/{confirmation}', 'BooksController@update2');
 
     Route::get('/passenger_list', 'BooksController@show3'); //feedback for passenger
@@ -51,6 +51,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/start/{book}', 'StartsController@create');
 
     Route::get('/report', 'OfferController@report');
+
+    Route::get('/invoice/{invoice}', 'BooksController@invoice');
+    Route::get('pdf/resit/{invoice}','BooksController@showReceiptPDF');
 
 
 
