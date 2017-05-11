@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 
+
+
     //ajax
     Route::get('/ajax-district', 'OfferController@ajax');
     Route::get('/ajax-subdistrict', 'OfferController@ajax2');
@@ -77,4 +79,9 @@ Route::get('/home', 'HomeController@index');
 Route::get('datatables', function () {
     $users =  App\User::all();
     return view('datatable', compact('users'));
+});
+
+
+Route::get('testing', function () {
+    return view('testing');
 });

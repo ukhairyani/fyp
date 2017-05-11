@@ -84,4 +84,16 @@ class CommentdsController extends Controller
     {
         //
     }
+
+    public function rating()
+    {
+        $user = User::first();
+        $post = Post::first();
+
+        $rating = $post->rating([
+            'rating' => 5
+        ], $user);
+
+        dd($rating);
+    }
 }

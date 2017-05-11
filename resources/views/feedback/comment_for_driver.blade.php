@@ -42,6 +42,21 @@
           @endif
       </div>
     </div>
+
+    <div class="col-md-10">
+      <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}" >
+      <label class="col-md-2 control-label">Rating</label>
+      <div class="col-md-8">
+        {{--@for ($i=0; $i < 5; $i++)
+            <span class="glyphicon glyphicon-star"></span>
+        @endfor--}}
+
+        <div class='starrr'></div>
+      </div>
+    </div>
+    </div>
+
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <a href="{{ url('/driver_list') }}" class="btn btn-default">Cancel</a>
@@ -53,4 +68,14 @@
     </div>
   </div>
   </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.starrr').starrr({
+            rating: 4
+        });
+    });
+</script>
 @endsection

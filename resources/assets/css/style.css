@@ -11,7 +11,7 @@ p {margin: 0;}
 html, body{
   font-family: 'Lato', sans-serif;
    font-size: 100%;
-   background:#fff;
+   background:#fff; 
 }
 a {
   text-decoration: none;
@@ -25,12 +25,12 @@ a:hover {
 }
 /*--header start here--*/
 .logo {
-    float: absolute;
+    float: left;
     width: 50%;
 }
 .top-navg {
-    float: left;
-    width: 0%;
+    float: right;
+    width: 50%;
 }
 .top-navg ul.res {
     padding: 0em;
@@ -422,7 +422,7 @@ span.rit-bar-visit {
 }
 .g1:hover div.people-caption{
 	display:block;
-
+	
 }
 .people-caption{
 	position: absolute;
@@ -479,7 +479,7 @@ span.rit-bar-visit {
     text-align: center;
     margin-top: 1em;
 }
-/*--disk end here--*/
+/*--disk end here--*/ 
 /*--features strat here--*/
 .features {
     padding: 5em 0em;
@@ -953,13 +953,13 @@ ul.grid-blog li{
 ul.grid-blog li a, ul.grid-blog li span{
 	text-decoration: none;
 	font-size: 1em;
-	color: #8A8A8A;
+	color: #8A8A8A;	
 	display: inline-block;
 	margin: 0 1em 0 0;
 }
 ul.grid-blog li i{
 	margin: 0 5px 0 0;
-	color:#3cafe6;
+	color:#3cafe6;	
 }
 ul.grid-blog {
 	 padding: 1.5em 0;
@@ -995,7 +995,7 @@ ul.grid-blog {
 }
 .single-grid textarea{
 	resize:none;
-	height: 185px;
+	height: 185px;	
 }
 .single-grid {
     width: 60%;
@@ -1313,7 +1313,7 @@ span.rit-bar-short {
 .view {
    overflow: hidden;
    position: relative;
-   text-align: center;
+   text-align: center; 
    cursor: default;
 }
 .view .mask, .view .content {
@@ -1370,7 +1370,7 @@ span.rit-bar-short {
 .galley-grid h1{
 	color: #000;
     font-size: 3em;
-	text-align: center;
+	text-align: center;	
 }
 .galley-grid p{
 	color: #A9A9A9;
@@ -1391,7 +1391,7 @@ span.rit-bar-short {
 	display:inline-block;
 	vertical-align:top;
 	font-weight: 300;
-
+	
 	width: 100%;
 }
 .b-link-stripe .b-wrapper{
@@ -1594,21 +1594,21 @@ span.rit-bar-contact {
 /*--contact--*/
 /*--meadia quiries start here--*/
 @media(max-width:1600px){
-
+	
 }
 @media(max-width:1440px){
 
 }
 @media(max-width:1366px){
-
+	
 }
 @media(max-width:1280px){
-
+	
 }
 @media(max-width:1024px){
 .logo {
     width: 40%;
-}
+}	
 .top-navg {
     float: right;
     width: 60%;
@@ -1654,7 +1654,7 @@ span.lft-bar-visit {
     left: 32%;
 }
 span.rit-bar-visit {
-    right: 32%;
+    right: 32%;    
 }
 .about-right h4 {
     font-size: 1.1em;
@@ -1739,7 +1739,7 @@ ul.res li a {
 @media(max-width:991px){
 .top-navg {
     width: 65%;
-}
+}	
 .logo {
     width: 35%;
 }
@@ -1772,7 +1772,7 @@ span.rit-bar-team {
     width: 25%;
 }
 span.lft-bar-fea {
-    left: 28%;
+    left: 28%;   
 }
 span.rit-bar-fea {
     right: 28%;
@@ -2065,13 +2065,13 @@ h3.typo1 {
 }
 h1.grid2 {
   font-size: 2.3em;
-}
+}	
 .testimonal-main a.testimo-btn {
   font-size: 0.81em;
-}
+}	
 h3.typo1 {
   font-size: 2.5em;
-}
+}	
 }
 @media(max-width:640px){
 .banner {
@@ -2212,14 +2212,14 @@ h3.typo1 {
 }
 .page {
   margin: 2em 0;
-}
+}	
 .people-caption {
     width: 91%;
-}
+}	
 }
 @media(max-width:667px){
 .visit-grid h4 {
-    font-size: 1.15em;
+    font-size: 1.15em;	
 }
 }
 @media(max-width:480px){
@@ -2508,7 +2508,7 @@ span.rit-bar-visit {
 }
 /*--typo--*/
 .page-header h3 {
-  font-size: 2em;
+  font-size: 2em; 
 }
 button.btn.btn-lg {
   font-size: 1em;
@@ -2542,7 +2542,7 @@ h4.grid2 {
 }
 h3.typo1 {
   font-size: 2em;
-}
+}		
 }
 @media(max-width:320px){
 .logo img {
@@ -3025,7 +3025,7 @@ span.label {
 }
 h3.typo1 {
   font-size: 1.5em;
-}
+}	
 
 }
 /*--meadia quiries end here--*/

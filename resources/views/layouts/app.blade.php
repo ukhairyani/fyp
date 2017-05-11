@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +12,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style1.css') }}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
+
+    <link rel="stylesheet" href="{{ asset('css/starrr.css') }}">
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> --}}
+    <meta name="keywords" content="Tour Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--Google Fonts-->
+    <link href='//fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
 
     <!-- Scripts -->
     <script>
@@ -36,7 +41,7 @@
     </script>
 
 
-<script >
+<script>
           $( document ).ready(function() {
           $( "#states" ).change(function(e){
             console.log(e);
@@ -62,9 +67,9 @@
 
 </head>
 <body>
+    {{-- <div class="header"> --}}
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -138,7 +143,52 @@
                         @endif
                     </ul>
                 </div>
-            </div>
+
+                {{-- <div class="header">
+                  <div class="container">
+                    <div class="header-main">
+                      <div class="top-navg">
+                            <nav class="cl-effect-13">
+                               <ul class="res">
+                                   <li><a class="active" href="{{ url('/home') }}">Home</a></li>
+                                   <li><a href="{{ url('/offer') }}">Offer Ride</a></li>
+                                   <li><a href="{{ url('/catalog') }}">Catalog</a></li>
+                                   <li class="dropdown">
+                                       <a href="#" data-toggle="dropdown" role="button">Notification</a>
+                                       <ul class="dropdown-menu" role="menu">
+                                           <li><a href="{{ url('/notification') }}">Booking Request</a></li>
+                                           <li><a href="{{ url('/confirmation') }}">Ride Confirmation</a></li>
+                                       </ul>
+                                   </li>
+                                   <li><a href="{{ url('/start') }}">Active Ride</a></li>
+                                   <li class="dropdown">
+                                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Give Feedback</a>
+                                       <ul class="dropdown-menu" role="menu">
+                                           <li><a href="{{ url('/driver_list') }}">Your Driver</a></li>
+                                           <li><a href="{{ url('/passenger_list') }}">Your Passenger</a></li>
+                                       </ul>
+                                   </li>
+                                   <li><a href="{{ url('/report') }}">Report</a></li>
+
+
+                                   {{-- <li><a href="gallery.html">Gallery</a></li> --}}
+                                   {{-- <li><a href="contact.html">Contact</a></li> --}}
+                               </ul>
+                           </nav>
+                           <!-- script-for-menu -->
+                                <script>
+                                  $( "span.menu" ).click(function() {
+                                    $( "ul.res" ).slideToggle( 300, function() {
+                                    // Animation complete.
+                                     });
+                                    });
+                               </script>
+                      </div>
+                       <div class="clearfix"> </div>
+                     </div>
+                   </div>
+                 </div>
+
         </nav>
 
         <div class="container">
@@ -171,10 +221,12 @@
         </div>
     </div>
 </div>
+{{-- </diwev> --}}
 
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/starrr.js') }}"></script>
 
     <script>
         $(document).on("click", "#confirm-modal", function(e) {
@@ -191,5 +243,8 @@
     <script src="{{ asset('js/add-image.js') }}"></script>
     @yield('scripts')
 
+    {{-- <div class="copy-right wow bounceInLeft" data-wow-delay="0.3s">
+   	  <p> &copy; 2016 All rights reserved | Design by ukhairyani</a></p>
+  </div> --}}
 </body>
 </html>

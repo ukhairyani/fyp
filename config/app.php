@@ -166,10 +166,14 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,     //graph
         Barryvdh\DomPDF\ServiceProvider::class,     //pdf
 
+
+
         /*
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+
+        Ghanem\Rating\RatingServiceProvider::class,
 
         /*
          * Application Service Providers...
